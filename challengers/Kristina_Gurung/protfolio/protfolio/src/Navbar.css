@@ -1,0 +1,47 @@
+.navbar {
+  position: fixed;        /* Stays at top while scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  background: rgba(255, 255, 255, 0.1);   /* semi-transparent */
+  backdrop-filter: blur(12px);             /* THE glass blur */
+  -webkit-backdrop-filter: blur(12px);     /* Safari support */
+  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+}
+.navbar {
+  /* add to existing rule */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;    /* removes bullet points */
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  
+  /* This is what makes hover SMOOTH */
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #a78bfa;      /* purple accent — change to your color */
+  opacity: 0.85;
+}
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;    /* hide links on small screens */
+  }
+  /* Later you'll add a hamburger menu here */
+}
