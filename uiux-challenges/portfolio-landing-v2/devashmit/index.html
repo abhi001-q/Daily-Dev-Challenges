@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Devashmit — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner container">
+  <a href="#" class="nav__logo">dev<span>ashmit</span></a>
+  <ul class="nav__links"><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></nav>
+
+<section class="hero" id="home"><div class="container hero__inner">
+  <div>
+    <p class="hero__greeting">Hi, I'm</p>
+    <h1 class="hero__name">Devashmit</h1>
+    <p class="hero__role">Full-Stack Developer</p>
+    <p class="hero__bio">I build performant web apps with modern tools. Passionate about daily coding challenges and open source.</p>
+    <div class="hero__cta"><a href="#projects" class="btn btn--primary">View Projects</a><a href="#contact" class="btn btn--outline">Contact Me</a></div>
+  </div>
+  <div class="avatar" aria-hidden="true">👨‍💻</div>
+</div></section>
+
+<section class="section section--surface" id="about"><div class="container">
+  <h2 class="section__title">About Me</h2>
+  <div class="about__grid">
+    <div class="about__text">
+      <p>I'm a developer who loves turning ideas into real products — from clean UIs to robust APIs.</p>
+      <p>I participate in daily coding challenges to stay sharp and contribute to open source projects every day.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat__num">7+</div><div class="stat__label">Projects</div></div>
+      <div class="stat"><div class="stat__num">Daily</div><div class="stat__label">Challenges</div></div>
+      <div class="stat"><div class="stat__num">5+</div><div class="stat__label">Stacks</div></div>
+      <div class="stat"><div class="stat__num">100%</div><div class="stat__label">Committed</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section" id="skills"><div class="container">
+  <h2 class="section__title">Skills</h2>
+  <div class="skills__grid">
+    <div class="skill-tag">React</div><div class="skill-tag">JavaScript</div><div class="skill-tag">Python</div>
+    <div class="skill-tag">FastAPI</div><div class="skill-tag">HTML &amp; CSS</div><div class="skill-tag">SQLite</div>
+    <div class="skill-tag">Git &amp; GitHub</div><div class="skill-tag">REST APIs</div><div class="skill-tag">Bash</div>
+    <div class="skill-tag">UI/UX Design</div><div class="skill-tag">Node.js</div><div class="skill-tag">Vite</div>
+  </div>
+</div></section>
+
+<section class="section section--surface" id="projects"><div class="container">
+  <h2 class="section__title">Projects</h2>
+  <div class="projects__grid">
+    <article class="project-card"><div class="project-card__icon">🔗</div><h3 class="project-card__title">URL Shortener</h3><p class="project-card__desc">Bitly-style shortener with click analytics. FastAPI + React + SQLite.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span></div></article>
+    <article class="project-card"><div class="project-card__icon">⏱️</div><h3 class="project-card__title">Pomodoro Timer</h3><p class="project-card__desc">useEffect + useReducer timer with session tracking.</p><div class="tags"><span class="tag">React</span><span class="tag">Hooks</span></div></article>
+    <article class="project-card"><div class="project-card__icon">🔐</div><h3 class="project-card__title">JWT Auth System</h3><p class="project-card__desc">httpOnly cookies, bcrypt, protected routes.</p><div class="tags"><span class="tag">FastAPI</span><span class="tag">JWT</span></div></article>
+    <article class="project-card"><div class="project-card__icon">🌤️</div><h3 class="project-card__title">Weather Dashboard</h3><p class="project-card__desc">Real-time weather with 5-day forecast and unit toggle.</p><div class="tags"><span class="tag">React</span><span class="tag">OpenWeather</span></div></article>
+    <article class="project-card"><div class="project-card__icon">🐍</div><h3 class="project-card__title">Web Scraper</h3><p class="project-card__desc">BeautifulSoup scraper with pagination and CSV/JSON export.</p><div class="tags"><span class="tag">Python</span><span class="tag">BS4</span></div></article>
+    <article class="project-card"><div class="project-card__icon">💳</div><h3 class="project-card__title">Banking Dashboard</h3><p class="project-card__desc">Finance UI with dark/light mode and spending chart.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div></article>
+  </div>
+</div></section>
+
+<section class="section" id="contact"><div class="container contact__inner">
+  <h2 class="section__title">Get in Touch</h2>
+  <p class="contact__text">Open to collaborations, code reviews, and new challenges.</p>
+  <div class="contact__links">
+    <a href="https://github.com/devashmit" class="contact-link" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+    <a href="mailto:devashmit@example.com" class="contact-link">✉️ Email</a>
+  </div>
+</div></section>
+
+<footer class="footer"><p>Built by <strong>devashmit</strong> · Daily Dev Challenges</p></footer>
+<script src="script.js"></script>
+</body>
+</html>
