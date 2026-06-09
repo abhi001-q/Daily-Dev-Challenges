@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Banking Dashboard</title>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d2e;--surface-2:#252840;--border:#2e3250;--text:#f0f2ff;--muted:#8b92b8;--primary:#6366f1;--income:#4ade80;--income-bg:#14532d;--expense:#f87171;--expense-bg:#450a0a;--shadow:0 2px 16px rgba(0,0,0,.4)}
+[data-theme="light"]{--bg:#f4f6fb;--surface:#ffffff;--surface-2:#f0f2f8;--border:#e2e6f0;--text:#1a1d2e;--muted:#6b7280;--primary:#4f46e5;--income:#16a34a;--income-bg:#dcfce7;--expense:#dc2626;--expense-bg:#fee2e2;--shadow:0 2px 12px rgba(0,0,0,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;transition:background .3s,color .3s}
+.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:2rem;position:sticky;top:0;height:100vh;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.1rem;color:var(--primary)}
+.nav-list{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.nav-link{display:block;padding:.65rem .9rem;border-radius:8px;text-decoration:none;color:var(--muted);font-size:.9rem;transition:all .15s}
+.nav-link:hover,.nav-link.active{background:var(--surface-2);color:var(--primary);font-weight:600}
+.main{flex:1;padding:1.5rem 2rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.5rem}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start}
+.topbar h1{font-size:1.4rem;font-weight:700}.topbar p{color:var(--muted);font-size:.9rem;margin-top:.2rem}
+.theme-toggle{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;cursor:pointer;font-size:1.1rem;transition:background .2s}
+.theme-toggle:hover{background:var(--border)}
+.cards-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.card{border-radius:14px;padding:1.4rem;color:#fff;display:flex;flex-direction:column;gap:.4rem}
+.card--primary{background:linear-gradient(135deg,#4f46e5,#7c3aed)}
+.card--savings{background:linear-gradient(135deg,#0891b2,#0e7490)}
+.card--credit{background:linear-gradient(135deg,#b45309,#92400e)}
+.card__label{font-size:.8rem;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+.card__amount{font-size:1.8rem;font-weight:700}
+.card__change{font-size:.8rem;font-weight:600}
+.income{color:var(--income)}.expense{color:var(--expense)}
+.quick-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.action-btn{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:.9rem 1.4rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--text);transition:all .15s;box-shadow:var(--shadow)}
+.action-btn:hover{background:var(--surface-2);transform:translateY(-2px)}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.section-title{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.transactions,.chart-section{background:var(--surface);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow)}
+.tx-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.tx-item{display:flex;align-items:center;gap:.9rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.tx-item:last-child{border-bottom:none}
+.tx-icon{width:38px;height:38px;border-radius:10px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.tx-info{flex:1}.tx-name{font-size:.9rem;font-weight:600}.tx-date{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.tx-amount{font-size:.95rem;font-weight:700;flex-shrink:0}
+.chart{height:200px;display:flex;align-items:flex-end}
+.chart__bars{display:flex;align-items:flex-end;gap:1rem;width:100%;height:100%}
+.chart__bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem;height:100%;justify-content:flex-end}
+.chart__bar{width:100%;border-radius:6px 6px 0 0;transition:opacity .2s;min-height:4px;height:var(--h)}
+.chart__bar:hover{opacity:.8}
+.income-bar{background:var(--income)}.expense-bar{background:var(--expense)}
+.chart__label{font-size:.7rem;color:var(--muted);text-align:center;white-space:nowrap}
+.chart__value{font-size:.7rem;font-weight:600;color:var(--text);text-align:center}
+@media(max-width:900px){.bottom-grid{grid-template-columns:1fr}}
+@media(max-width:768px){body{flex-direction:column}.sidebar{width:100%;height:auto;position:static}.main{padding:1rem}}
+</style></head>
+<body>
+<aside class="sidebar"><div class="logo">💳 FinanceApp</div>
+  <nav><ul class="nav-list">
+    <li><a href="#" class="nav-link active">🏠 Dashboard</a></li>
+    <li><a href="#" class="nav-link">💸 Transfers</a></li>
+    <li><a href="#" class="nav-link">📊 Analytics</a></li>
+    <li><a href="#" class="nav-link">⚙️ Settings</a></li>
+  </ul></nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div><h1>Good morning, Devashmit 👋</h1><p>Here's your financial overview</p></div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="cards-row">
+    <div class="card card--primary"><p class="card__label">Total Balance</p><p class="card__amount">$24,563.00</p><p class="card__change income">▲ 3.2% this month</p></div>
+    <div class="card card--savings"><p class="card__label">Savings</p><p class="card__amount">$8,200.00</p><p class="card__change income">▲ 1.8% this month</p></div>
+    <div class="card card--credit"><p class="card__label">Credit Used</p><p class="card__amount">$1,340.00</p><p class="card__change expense">▼ 26.8% utilization</p></div>
+  </div>
+  <div class="quick-actions">
+    <button class="action-btn"><span>↗️</span>Transfer</button>
+    <button class="action-btn"><span>💳</span>Pay</button>
+    <button class="action-btn"><span>⬆️</span>Top Up</button>
+    <button class="action-btn"><span>•••</span>More</button>
+  </div>
+  <div class="bottom-grid">
+    <section class="transactions"><h2 class="section-title">Recent Transactions</h2>
+      <ul class="tx-list">
+        <li class="tx-item"><div class="tx-icon">🛒</div><div class="tx-info"><p class="tx-name">Grocery Store</p><p class="tx-date">Jun 9, 2026</p></div><p class="tx-amount expense">-$84.50</p></li>
+        <li class="tx-item"><div class="tx-icon">💼</div><div class="tx-info"><p class="tx-name">Salary Deposit</p><p class="tx-date">Jun 7, 2026</p></div><p class="tx-amount income">+$3,200.00</p></li>
+        <li class="tx-item"><div class="tx-icon">🎬</div><div class="tx-info"><p class="tx-name">Netflix</p><p class="tx-date">Jun 6, 2026</p></div><p class="tx-amount expense">-$15.99</p></li>
+        <li class="tx-item"><div class="tx-icon">💰</div><div class="tx-info"><p class="tx-name">Freelance</p><p class="tx-date">Jun 5, 2026</p></div><p class="tx-amount income">+$750.00</p></li>
+        <li class="tx-item"><div class="tx-icon">⛽</div><div class="tx-info"><p class="tx-name">Gas Station</p><p class="tx-date">Jun 4, 2026</p></div><p class="tx-amount expense">-$55.00</p></li>
+      </ul>
+    </section>
+    <section class="chart-section"><h2 class="section-title">Monthly Spending</h2>
+      <div class="chart"><div class="chart__bars">
+        <div class="chart__bar-group"><div class="chart__bar expense-bar" style="--h:70%"></div><span class="chart__label">Food</span><span class="chart__value">$420</span></div>
+        <div class="chart__bar-group"><div class="chart__bar expense-bar" style="--h:45%"></div><span class="chart__label">Transport</span><span class="chart__value">$270</span></div>
+        <div class="chart__bar-group"><div class="chart__bar income-bar" style="--h:100%"></div><span class="chart__label">Income</span><span class="chart__value">$3,950</span></div>
+        <div class="chart__bar-group"><div class="chart__bar expense-bar" style="--h:30%"></div><span class="chart__label">Entertain</span><span class="chart__value">$180</span></div>
+        <div class="chart__bar-group"><div class="chart__bar expense-bar" style="--h:55%"></div><span class="chart__label">Bills</span><span class="chart__value">$330</span></div>
+      </div></div>
+    </section>
+  </div>
+</main>
+<script src="script.js"></script>
+</body></html>
