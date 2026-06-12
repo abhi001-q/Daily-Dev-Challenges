@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Real-time Search</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="app">
+  <header class="app__header">
+    <h1>🔍 Country Search</h1>
+    <p class="app__sub">Real-time filter with highlight — 50+ countries</p>
+  </header>
+  <div class="search-wrap">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Type to search…" autocomplete="off" aria-label="Search countries" aria-controls="resultsList" />
+  </div>
+  <div class="chips" role="group" aria-label="Filter by continent">
+    <button class="chip active" data-filter="all">All</button>
+    <button class="chip" data-filter="Asia">Asia</button>
+    <button class="chip" data-filter="Europe">Europe</button>
+    <button class="chip" data-filter="Americas">Americas</button>
+    <button class="chip" data-filter="Africa">Africa</button>
+    <button class="chip" data-filter="Oceania">Oceania</button>
+  </div>
+  <p class="result-count" id="resultCount" aria-live="polite"></p>
+  <ul class="results-list" id="resultsList" role="list"></ul>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

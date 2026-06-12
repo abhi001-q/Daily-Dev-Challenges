@@ -1,0 +1,28 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0f1117;color:#f0f2ff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
+.card{background:#1a1d2e;border:1px solid #2e3250;border-radius:16px;padding:2rem;width:100%;max-width:480px}
+.progress{margin-bottom:1.5rem}
+.progress__bar{height:4px;background:#252840;border-radius:4px;overflow:hidden;margin-bottom:.75rem}
+.progress__fill{height:100%;background:#6366f1;border-radius:4px;transition:width .4s ease}
+.progress__labels{display:flex;justify-content:space-between}
+.progress__step{font-size:.72rem;font-weight:600;color:#4b5280;transition:color .2s}
+.progress__step.active{color:#818cf8}
+.step-title{font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
+.step-sub{color:#8b92b8;font-size:.88rem;margin-bottom:1.5rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
+.form-group label{font-size:.82rem;font-weight:600;color:#8b92b8}
+.form-group input{background:#252840;border:1px solid #2e3250;border-radius:8px;padding:.7rem 1rem;color:#f0f2ff;font-size:.95rem;outline:none;transition:border-color .2s}
+.form-group input:focus{border-color:#6366f1}
+.form-group input.error{border-color:#f87171}
+.err{color:#f87171;font-size:.75rem;margin-top:.2rem}
+.actions{display:flex;gap:.75rem;margin-top:1.25rem}
+.btn{flex:1;padding:.7rem;border:none;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s}
+.btn--primary{background:#4f46e5;color:#fff}.btn--primary:hover{background:#4338ca}
+.btn--ghost{background:#252840;color:#8b92b8}.btn--ghost:hover{background:#2e3250}
+.review{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem}
+.review__row{display:flex;justify-content:space-between;padding:.6rem;background:#252840;border-radius:8px;font-size:.88rem}
+.review__key{color:#8b92b8;font-weight:600}.review__val{font-weight:600}
+.success{text-align:center;padding:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.success__icon{font-size:3rem}.success h2{font-size:1.4rem;font-weight:800}
+.success p{color:#8b92b8;font-size:.9rem}
+.btn--success{background:#16a34a;color:#fff;padding:.7rem 2rem;border:none;border-radius:8px;font-weight:700;cursor:pointer;margin-top:.5rem}
