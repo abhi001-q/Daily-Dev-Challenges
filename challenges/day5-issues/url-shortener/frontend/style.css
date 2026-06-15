@@ -1,0 +1,55 @@
+/* style.css - Premium design for URL Shortener */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, hsl(210, 40%, 15%), hsl(210, 30%, 10%));
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #fff;
+}
+input[type="url"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: hsl(210, 70%, 55%);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: hsl(210, 80%, 45%);
+}
+.result {
+  margin-top: 1rem;
+  word-break: break-all;
+  background: rgba(255,255,255,0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+.hidden { display: none; }
