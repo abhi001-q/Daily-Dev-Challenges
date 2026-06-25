@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Vanilla Todo</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0f1117;color:#f0f2ff;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:3rem 1rem}
+.app{width:100%;max-width:520px}
+.app h1{font-size:1.8rem;font-weight:800;margin-bottom:1.5rem}
+.af{display:flex;gap:.5rem;margin-bottom:1rem}
+.af input{flex:1;background:#1a1d2e;border:1px solid #2e3250;border-radius:10px;padding:.75rem 1rem;color:#f0f2ff;font-size:.95rem;outline:none;transition:border-color .2s}
+.af input:focus{border-color:#6366f1}.af input::placeholder{color:#4b5280}
+.ab{background:#4f46e5;color:#fff;border:none;border-radius:10px;padding:.75rem 1.2rem;font-weight:700;cursor:pointer}.ab:hover{background:#4338ca}
+.filters{display:flex;gap:.3rem;background:#1a1d2e;border-radius:10px 10px 0 0;padding:.4rem;border-bottom:1px solid #2e3250}
+.fb{flex:1;padding:.5rem;border:none;border-radius:7px;background:transparent;color:#8b92b8;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s}
+.fb.active{background:#4f46e5;color:#fff}
+ul{list-style:none;background:#1a1d2e;border-left:1px solid #2e3250;border-right:1px solid #2e3250}
+ul:empty::after{content:"Nothing here. Add a todo!";display:block;text-align:center;padding:2rem;color:#4b5280;font-size:.9rem}
+li{display:flex;align-items:center;gap:.75rem;padding:.9rem 1rem;border-bottom:1px solid #2e3250;transition:background .15s}
+li:hover{background:#252840}li:last-child{border-bottom:none}
+.ck{width:20px;height:20px;border:2px solid #4b5280;border-radius:50%;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.ck.done{background:#4f46e5;border-color:#4f46e5}.ck.done::after{content:"✓";color:#fff;font-size:.72rem;font-weight:700}
+.tt{flex:1;font-size:.95rem}.tt.done{text-decoration:line-through;color:#4b5280}
+.dl{background:none;border:none;color:#4b5280;font-size:1.1rem;cursor:pointer;padding:.2rem .4rem;border-radius:4px;opacity:0;transition:all .15s}
+li:hover .dl{opacity:1}.dl:hover{color:#f87171}
+footer{display:flex;justify-content:space-between;align-items:center;background:#1a1d2e;border:1px solid #2e3250;border-top:none;border-radius:0 0 10px 10px;padding:.65rem 1rem;font-size:.8rem;color:#8b92b8}
+.cl{background:none;border:none;color:#8b92b8;font-size:.8rem;cursor:pointer}.cl:hover{color:#f87171}
+</style></head>
+<body>
+<div class="app">
+  <h1>✅ Todo App</h1>
+  <form class="af" id="af"><input id="ti" type="text" placeholder="What needs to be done?" autocomplete="off" maxlength="120"/><button class="ab" type="submit">Add</button></form>
+  <div class="filters" role="tablist"><button class="fb active" data-f="all">All</button><button class="fb" data-f="active">Active</button><button class="fb" data-f="completed">Completed</button></div>
+  <ul id="tl"></ul>
+  <footer><span id="cnt">0 items left</span><button class="cl" id="cl">Clear completed</button></footer>
+</div>
+<script>
+const KEY="devd28todos";let todos=JSON.parse(localStorage.getItem(KEY)||"[]"),filter="all";
+function save(){localStorage.setItem(KEY,JSON.stringify(todos));}
+function esc(s){const d=document.createElement("div");d.appendChild(document.createTextNode(s));return d.innerHTML;}
+function render(){
+  const ul=document.getElementById("tl");ul.innerHTML="";
+  const vis=todos.filter(t=>filter==="all"||(filter==="active"&&!t.done)||(filter==="completed"&&t.done));
+  vis.forEach(t=>{const li=document.createElement("li");li.dataset.id=t.id;
+    li.innerHTML=`<div class="ck${t.done?" done":""}" data-action="ck"></div><span class="tt${t.done?" done":""}">${esc(t.text)}</span><button class="dl" data-action="dl">✕</button>`;
+    ul.appendChild(li);});
+  const left=todos.filter(t=>!t.done).length;document.getElementById("cnt").textContent=`${left} item${left!==1?"s":""} left`;
+}
+document.getElementById("af").addEventListener("submit",e=>{e.preventDefault();const i=document.getElementById("ti");const t=i.value.trim();if(!t)return;todos.push({id:Date.now(),text:t,done:false});save();render();i.value="";i.focus();});
+document.getElementById("tl").addEventListener("click",e=>{const li=e.target.closest("li");if(!li)return;const id=Number(li.dataset.id);const t=todos.find(x=>x.id===id);if(!t)return;const a=e.target.dataset.action||e.target.closest("[data-action]")?.dataset.action;if(a==="ck"){t.done=!t.done;save();render();}if(a==="dl"){todos=todos.filter(x=>x.id!==id);save();render();}});
+document.querySelectorAll(".fb").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".fb").forEach(x=>x.classList.toggle("active",x===b));render();}));
+document.getElementById("cl").addEventListener("click",()=>{todos=todos.filter(t=>!t.done);save();render();});
+render();
+</script>
+</body></html>

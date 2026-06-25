@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Habit Tracker</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0a0a0f;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem}
+.phone{width:375px;min-height:812px;background:#0f1117;border-radius:40px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);border:1px solid #1a1d2e}
+.app-header{display:flex;justify-content:space-between;align-items:flex-start;padding:3rem 1.5rem 1rem}
+.app-header h1{font-size:1.6rem;font-weight:800;color:#f0f2ff}.app-header p{font-size:.85rem;color:#8b92b8;margin-top:.2rem}
+.icon-btn{width:44px;height:44px;background:#4f46e5;border:none;border-radius:12px;color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec{padding:0 1.5rem 1.5rem}
+.sec-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8b92b8;margin-bottom:.75rem}
+.week-row{display:flex;justify-content:space-between;gap:.3rem}
+.day-cell{flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:.6rem 0;border-radius:10px;background:#1a1d2e;border:1px solid #2e3250;min-width:44px}
+.day-cell--today{background:#252840;border-color:#6366f1}
+.day-cell__label{font-size:.7rem;color:#8b92b8;font-weight:600}
+.day-cell--today .day-cell__label{color:#818cf8}
+.day-cell__dot{width:8px;height:8px;border-radius:50%;background:#2e3250}
+.day-cell--done .day-cell__dot{background:#4ade80}
+.habits-sec{padding:0 1.5rem;flex:1;overflow-y:auto}
+.habits-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.habit-item{display:flex;align-items:center;gap:.75rem;background:#1a1d2e;border:1px solid #2e3250;border-radius:14px;padding:.9rem 1rem;min-height:72px;transition:border-color .2s}
+.habit-item--done{border-color:#14532d;background:#0d1f14}
+.habit-check{width:44px;height:44px;border-radius:50%;border:2px solid #2e3250;background:transparent;color:#4ade80;font-size:1.1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.habit-item--done .habit-check{background:#4ade80;border-color:#4ade80;color:#0a0a0f}
+.habit-emoji{font-size:1.4rem;flex-shrink:0}
+.habit-info{flex:1}.habit-name{font-size:.95rem;font-weight:600;color:#f0f2ff}.habit-streak{font-size:.75rem;color:#8b92b8;margin-top:.2rem}
+.habit-item--done .habit-name{text-decoration:line-through;color:#4b5280}
+.habit-ring{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ring{position:absolute;top:0;left:0}.ring-pct{font-size:.6rem;font-weight:700;color:#f0f2ff;position:relative;z-index:1}
+.bottom-nav{display:flex;background:#1a1d2e;border-top:1px solid #2e3250;padding:.5rem 0 1.5rem}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.6rem 0;background:none;border:none;cursor:pointer;min-height:56px}
+.nav-btn__icon{font-size:1.3rem}.nav-btn__label{font-size:.65rem;font-weight:600;color:#4b5280}
+.nav-btn.active .nav-btn__label{color:#6366f1}
+@media(max-width:400px){body{padding:0;align-items:flex-start}.phone{width:100%;min-height:100vh;border-radius:0}}
+</style></head>
+<body>
+<div class="phone">
+  <header class="app-header"><div><p>Good morning 👋</p><h1>My Habits</h1></div><button class="icon-btn" aria-label="Add">＋</button></header>
+  <section class="sec"><p class="sec-title">This Week</p><div class="week-row" id="weekRow" role="list"></div></section>
+  <section class="habits-sec"><p class="sec-title">Today</p><ul class="habits-list" id="habitsList" role="list"></ul></section>
+  <nav class="bottom-nav">
+    <button class="nav-btn active"><span class="nav-btn__icon">📅</span><span class="nav-btn__label">Today</span></button>
+    <button class="nav-btn"><span class="nav-btn__icon">📊</span><span class="nav-btn__label">Stats</span></button>
+    <button class="nav-btn"><span class="nav-btn__icon">⚙️</span><span class="nav-btn__label">Settings</span></button>
+  </nav>
+</div>
+<script>
+const HABITS=[{id:1,name:"Morning Run",emoji:"🏃",streak:5,done:false},{id:2,name:"Read 30 mins",emoji:"📚",streak:12,done:true},{id:3,name:"Drink 2L Water",emoji:"💧",streak:3,done:false},{id:4,name:"Meditate",emoji:"🧘",streak:7,done:true},{id:5,name:"No Social Media",emoji:"📵",streak:2,done:false}];
+const DAYS=["S","M","T","W","T","F","S"];const today=new Date().getDay();
+function renderWeek(){const row=document.getElementById("weekRow");DAYS.forEach((l,i)=>{const div=document.createElement("div");div.className=`day-cell${i===today?" day-cell--today":""}${i<today&&Math.random()>.3?" day-cell--done":""}`;div.innerHTML=`<span class="day-cell__label">${l}</span><span class="day-cell__dot"></span>`;row.appendChild(div);});}
+function ring(pct,color){const r=18,c=2*Math.PI*r,d=(pct/100)*c;return `<svg class="ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="${r}" fill="none" stroke="#252840" stroke-width="4"/><circle cx="22" cy="22" r="${r}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${d} ${c}" transform="rotate(-90 22 22)"/></svg>`;}
+function renderHabits(){const list=document.getElementById("habitsList");list.innerHTML="";HABITS.forEach(h=>{const pct=Math.min(100,Math.round((h.streak/7)*100));const color=h.done?"#4ade80":"#6366f1";const li=document.createElement("li");li.className=`habit-item${h.done?" habit-item--done":""}`;li.innerHTML=`<button class="habit-check" data-id="${h.id}">${h.done?"✓":""}</button><span class="habit-emoji">${h.emoji}</span><div class="habit-info"><p class="habit-name">${h.name}</p><p class="habit-streak">🔥 ${h.streak}-day streak</p></div><div class="habit-ring">${ring(pct,color)}<span class="ring-pct">${pct}%</span></div>`;list.appendChild(li);});list.querySelectorAll(".habit-check").forEach(b=>b.addEventListener("click",()=>{const h=HABITS.find(x=>x.id===Number(b.dataset.id));if(h){h.done=!h.done;renderHabits();}}));}
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".nav-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");}));
+renderWeek();renderHabits();
+</script>
+</body></html>
