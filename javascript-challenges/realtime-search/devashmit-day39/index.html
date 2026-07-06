@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Real-time Search</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:#0f1117;color:#f0f2ff;min-height:100vh;padding:2rem 1rem 4rem}
+.app{max-width:600px;margin:0 auto}header{text-align:center;margin-bottom:1.5rem}header h1{font-size:1.8rem;font-weight:800}header p{color:#8b92b8;font-size:.9rem;margin-top:.3rem}
+.sw{position:relative;margin-bottom:1rem}.si{width:100%;background:#1a1d2e;border:1px solid #2e3250;border-radius:12px;padding:.85rem 1rem .85rem 2.8rem;color:#f0f2ff;font-size:1rem;outline:none;transition:border-color .2s}.si:focus{border-color:#6366f1}.si::placeholder{color:#4b5280}
+.sic{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.chip{padding:.4rem 1rem;border:1px solid #2e3250;border-radius:100px;background:#1a1d2e;color:#8b92b8;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s}.chip:hover{border-color:#6366f1;color:#f0f2ff}.chip.active{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.cnt{font-size:.8rem;color:#8b92b8;margin-bottom:.75rem;min-height:1.2em}
+ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+li{display:flex;align-items:center;gap:.75rem;background:#1a1d2e;border:1px solid #2e3250;border-radius:10px;padding:.75rem 1rem;transition:all .15s}li:hover{border-color:#6366f1;transform:translateX(4px)}
+.flag{font-size:1.2rem;flex-shrink:0}.name{flex:1;font-size:.95rem;font-weight:500}.cont{font-size:.75rem;color:#8b92b8;background:#252840;border-radius:4px;padding:.2rem .5rem;white-space:nowrap}
+mark{background:#4f46e5;color:#fff;border-radius:3px;padding:0 2px}.nr{text-align:center;padding:2.5rem;color:#4b5280;font-size:.95rem}
+</style></head>
+<body>
+<div class="app">
+  <header><h1>🔍 Country Search</h1><p>Real-time filter with text highlight</p></header>
+  <div class="sw"><span class="sic">🔍</span><input class="si" id="q" type="text" placeholder="Type to search…" autocomplete="off"/></div>
+  <div class="chips" id="chips"><button class="chip active" data-f="all">All</button><button class="chip" data-f="Asia">Asia</button><button class="chip" data-f="Europe">Europe</button><button class="chip" data-f="Americas">Americas</button><button class="chip" data-f="Africa">Africa</button><button class="chip" data-f="Oceania">Oceania</button></div>
+  <p class="cnt" id="cnt" aria-live="polite"></p>
+  <ul id="list"></ul>
+</div>
+<script>
+const D=[{n:"Afghanistan",c:"Asia"},{n:"Albania",c:"Europe"},{n:"Algeria",c:"Africa"},{n:"Argentina",c:"Americas"},{n:"Australia",c:"Oceania"},{n:"Austria",c:"Europe"},{n:"Bangladesh",c:"Asia"},{n:"Belgium",c:"Europe"},{n:"Brazil",c:"Americas"},{n:"Canada",c:"Americas"},{n:"China",c:"Asia"},{n:"Colombia",c:"Americas"},{n:"Czech Republic",c:"Europe"},{n:"Denmark",c:"Europe"},{n:"Egypt",c:"Africa"},{n:"Finland",c:"Europe"},{n:"France",c:"Europe"},{n:"Germany",c:"Europe"},{n:"Ghana",c:"Africa"},{n:"India",c:"Asia"},{n:"Indonesia",c:"Asia"},{n:"Iran",c:"Asia"},{n:"Italy",c:"Europe"},{n:"Japan",c:"Asia"},{n:"Kenya",c:"Africa"},{n:"Malaysia",c:"Asia"},{n:"Mexico",c:"Americas"},{n:"Morocco",c:"Africa"},{n:"Nepal",c:"Asia"},{n:"Netherlands",c:"Europe"},{n:"New Zealand",c:"Oceania"},{n:"Nigeria",c:"Africa"},{n:"Norway",c:"Europe"},{n:"Pakistan",c:"Asia"},{n:"Peru",c:"Americas"},{n:"Philippines",c:"Asia"},{n:"Poland",c:"Europe"},{n:"Portugal",c:"Europe"},{n:"Russia",c:"Europe"},{n:"Saudi Arabia",c:"Asia"},{n:"South Africa",c:"Africa"},{n:"South Korea",c:"Asia"},{n:"Spain",c:"Europe"},{n:"Sweden",c:"Europe"},{n:"Thailand",c:"Asia"},{n:"Turkey",c:"Asia"},{n:"Ukraine",c:"Europe"},{n:"United Kingdom",c:"Europe"},{n:"United States",c:"Americas"},{n:"Vietnam",c:"Asia"},{n:"Zimbabwe",c:"Africa"}];
+const F={Asia:"🌏",Europe:"🌍",Americas:"🌎",Africa:"🌍",Oceania:"🌏"};
+let q="",f="all",t=null;
+function esc(s){const d=document.createElement("div");d.appendChild(document.createTextNode(s));return d.innerHTML;}
+function hl(s,q){if(!q)return esc(s);return esc(s).replace(new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi"),"<mark>$1</mark>");}
+function render(){const rows=D.filter(d=>d.n.toLowerCase().includes(q.toLowerCase())&&(f==="all"||d.c===f));const ul=document.getElementById("list");ul.innerHTML="";document.getElementById("cnt").textContent=`${rows.length} of ${D.length} countries`;if(!rows.length){ul.innerHTML=`<li class="nr">No results for "${esc(q)}"</li>`;return;}rows.forEach(d=>{const li=document.createElement("li");li.innerHTML=`<span class="flag">${F[d.c]||"🌐"}</span><span class="name">${hl(d.n,q)}</span><span class="cont">${d.c}</span>`;ul.appendChild(li);});}
+document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{q=e.target.value;render();},200);});
+document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;f=b.dataset.f;document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c===b));render();});
+render();
+</script>
+</body></html>
