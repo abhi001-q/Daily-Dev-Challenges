@@ -1,0 +1,16 @@
+{
+  "name": "url-shortener",
+  "version": "0.1.0",
+  "description": "Full‑stack URL shortener with click analytics",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "node backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nanoid": "^5.0.6"
+  }
+}
