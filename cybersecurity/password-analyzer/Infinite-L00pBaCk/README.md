@@ -16,8 +16,7 @@ It checks password strength by analyzing:
 - Clean, dark-mode cyber aesthetic.
 
 ## Screenshot
-*(Please replace this text with an actual screenshot of the running app!)*
-`![Screenshot](./screenshot.png)`
+![App Screenshot](./screenshot.png)
 
 ## Usage
 Simply open `index.html` in your browser and start typing! The background fetch will load the 10,000 common passwords automatically.
