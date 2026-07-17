@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyzer | Cybersecurity</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-shield-halved"></i> Password Strength Analyzer</h1>
+            <p>Analyze your password against common patterns and known breaches.</p>
+        </div>
+
+        <div class="analyzer-card">
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Enter a password to analyze..." autocomplete="off">
+                <button type="button" id="togglePassword"><i class="fa-solid fa-eye"></i></button>
+            </div>
+
+            <div class="strength-meter">
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="score-display">
+                    Score: <span id="score-text">0</span> / 100
+                </div>
+            </div>
+
+            <div class="feedback-section">
+                <h3 id="feedback-status">Waiting for input...</h3>
+                <div id="warning-box" class="warning-box hidden">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="warning-text"></span>
+                </div>
+                <ul id="suggestions-list" class="suggestions-list">
+                    <!-- Suggestions go here -->
+                </ul>
+            </div>
+            
+            <div class="loading-state" id="loading-state">
+                <i class="fa-solid fa-spinner fa-spin"></i> Loading common passwords list...
+            </div>
+        </div>
+    </div>
+
+    <!-- zxcvbn library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
