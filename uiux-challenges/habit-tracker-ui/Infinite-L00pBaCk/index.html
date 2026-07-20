@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Habit Tracker UI</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="mobile-container">
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span class="status-time">20:54</span>
+        <div class="status-icons">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="header-text">
+          <p class="greeting">Good Morning,</p>
+          <h1 class="username">Abhishek</h1>
+        </div>
+        <div class="profile-pic">
+          <div class="profile-gradient"></div>
+        </div>
+      </header>
+
+      <!-- Weekly Calendar -->
+      <section class="weekly-calendar">
+        <h3 class="section-title">This Week</h3>
+        <div class="days-row">
+          <button class="day-item active" aria-label="Monday 14">
+            <span class="day-name">M</span>
+            <span class="day-num">14</span>
+          </button>
+          <button class="day-item" aria-label="Tuesday 15">
+            <span class="day-name">T</span>
+            <span class="day-num">15</span>
+          </button>
+          <button class="day-item" aria-label="Wednesday 16">
+            <span class="day-name">W</span>
+            <span class="day-num">16</span>
+          </button>
+          <button class="day-item" aria-label="Thursday 17">
+            <span class="day-name">T</span>
+            <span class="day-num">17</span>
+          </button>
+          <button class="day-item" aria-label="Friday 18">
+            <span class="day-name">F</span>
+            <span class="day-num">18</span>
+          </button>
+          <button class="day-item" aria-label="Saturday 19">
+            <span class="day-name">S</span>
+            <span class="day-num">19</span>
+          </button>
+          <button class="day-item" aria-label="Sunday 20">
+            <span class="day-name">S</span>
+            <span class="day-num">20</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Today's Habits -->
+      <section class="habits-section">
+        <h3 class="section-title">Today's Habits</h3>
+
+        <!-- Habit 1: Drink Water -->
+        <div class="habit-card" data-progress="75" data-color="purple">
+          <div class="habit-info">
+            <div class="habit-icon icon-purple">
+              <span>💧</span>
+            </div>
+            <div class="habit-details">
+              <h4 class="habit-name">Drink Water</h4>
+              <p class="habit-streak">12 day streak 🔥</p>
+            </div>
+          </div>
+          <div class="progress-ring-container" role="button" aria-label="Complete habit">
+            <svg class="progress-ring" viewBox="0 0 48 48">
+              <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+              <circle class="ring-progress ring-purple" cx="24" cy="24" r="20" data-value="75"></circle>
+            </svg>
+            <span class="progress-label">3/4</span>
+          </div>
+        </div>
+
+        <!-- Habit 2: Read 10 Pages -->
+        <div class="habit-card completed" data-progress="100" data-color="orange">
+          <div class="habit-info">
+            <div class="habit-icon icon-orange">
+              <span>📖</span>
+            </div>
+            <div class="habit-details">
+              <h4 class="habit-name">Read 10 Pages</h4>
+              <p class="habit-streak">5 day streak 🔥</p>
+            </div>
+          </div>
+          <div class="progress-ring-container" role="button" aria-label="Habit completed">
+            <svg class="progress-ring" viewBox="0 0 48 48">
+              <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+              <circle class="ring-progress ring-orange" cx="24" cy="24" r="20" data-value="100"></circle>
+            </svg>
+            <span class="progress-label check">✓</span>
+          </div>
+        </div>
+
+        <!-- Habit 3: Morning Run -->
+        <div class="habit-card" data-progress="0" data-color="green">
+          <div class="habit-info">
+            <div class="habit-icon icon-green">
+              <span>🏃‍♂️</span>
+            </div>
+            <div class="habit-details">
+              <h4 class="habit-name">Morning Run</h4>
+              <p class="habit-streak">2 day streak 🔥</p>
+            </div>
+          </div>
+          <div class="progress-ring-container" role="button" aria-label="Complete habit">
+            <svg class="progress-ring" viewBox="0 0 48 48">
+              <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+              <circle class="ring-progress ring-green" cx="24" cy="24" r="20" data-value="0"></circle>
+            </svg>
+            <span class="progress-label">0/1</span>
+          </div>
+        </div>
+
+        <!-- Habit 4: Meditate -->
+        <div class="habit-card" data-progress="50" data-color="pink">
+          <div class="habit-info">
+            <div class="habit-icon icon-pink">
+              <span>🧘</span>
+            </div>
+            <div class="habit-details">
+              <h4 class="habit-name">Meditate</h4>
+              <p class="habit-streak">8 day streak 🔥</p>
+            </div>
+          </div>
+          <div class="progress-ring-container" role="button" aria-label="Complete habit">
+            <svg class="progress-ring" viewBox="0 0 48 48">
+              <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+              <circle class="ring-progress ring-pink" cx="24" cy="24" r="20" data-value="50"></circle>
+            </svg>
+            <span class="progress-label">1/2</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-item active" aria-label="Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item" aria-label="Stats">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          <span class="nav-label">Stats</span>
+        </button>
+        <button class="nav-fab" aria-label="Add Habit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button class="nav-item" aria-label="Community">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="nav-label">Social</span>
+        </button>
+        <button class="nav-item" aria-label="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="nav-label">Settings</span>
+        </button>
+      </nav>
+
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
