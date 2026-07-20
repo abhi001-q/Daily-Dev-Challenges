@@ -1,0 +1,189 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #3b82f6;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --border-color: #334155;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.header h1 i {
+    color: var(--primary);
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.analyzer-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    font-size: 1.2rem;
+    font-family: 'Fira Code', monospace;
+    background-color: #0f172a;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.input-group button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.input-group button:hover {
+    color: var(--text-main);
+}
+
+.strength-meter {
+    margin-bottom: 25px;
+}
+
+.progress-bar-container {
+    height: 10px;
+    background-color: #0f172a;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--danger);
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.score-display {
+    text-align: right;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+#score-text {
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.feedback-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+.warning-box {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid var(--danger);
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    color: #fca5a5;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.warning-box.hidden {
+    display: none;
+}
+
+.suggestions-list {
+    list-style: none;
+}
+
+.suggestions-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.suggestions-list li::before {
+    content: '\f0a9';
+    font-family: 'FontAwesome';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--primary);
+}
+
+.loading-state {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.loading-state.hidden {
+    display: none;
+}
